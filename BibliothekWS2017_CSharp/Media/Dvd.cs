@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BibliothekWS2017_CSharp.Media
 {
-    public class Book
+    public class Dvd
     {
-        public string id { get; set; } = "";
-        public string title { get; set; } = "";
-        public string isbn { get; set; } = "";
-        public string releaseDate { get; set; } = "";
-        public string publisher { get; set; } = "";
-        public string author { get; set; } = "";
+        private string id { get; set; } = "";
+        private string title { get; set; } = "";
+        private string asin { get; set; } = "";
+        private string releaseDate { get; set; } = "";
+        private string publisher { get; set; } = "";
+        private string director { get; set; } = "";
 
         public string getDateFormated()
         {
@@ -32,10 +31,10 @@ namespace BibliothekWS2017_CSharp.Media
             return "---------------------\n" +
                    "id : " + id + "\n" +
                    "titel : " + title + "\n" +
-                   "isbn : " + isbn + "\n" +
+                   "asin : " + asin + "\n" +
                    "releaseDate : " + getDateFormated() + "\n" +
                    "publisher : " + publisher + "\n" +
-                   "author : " + author + "\n" +
+                   "director : " + director + "\n" +
                    "---------------------";
         }
     }

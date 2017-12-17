@@ -21,7 +21,7 @@ namespace BibliothekWS2017_CSharp
                 Console.WriteLine(book);
             }
 
-            /*
+            
             Console.WriteLine("================");
             Console.WriteLine("Search for the book \"Der kleine Hobbit\" with the string \"d\"");
             Book bookToSearch = new Book();
@@ -31,7 +31,6 @@ namespace BibliothekWS2017_CSharp
             {
                 Console.WriteLine(book);
             }
-            */
 
             Console.Read();
         }
