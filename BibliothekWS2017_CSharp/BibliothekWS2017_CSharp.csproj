@@ -1,7 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <AssemblyTitle>BibliothekWS2017_Client</AssemblyTitle>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RuntimeFrameworkVersion>2.0.0-*</RuntimeFrameworkVersion>
+    <WarningsAsErrors>true</WarningsAsErrors>
+    <AssemblyName>BibliothekWS2017_Client</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    <MvcRazorCompileOnPublish Condition=" '$(Configuration)' == 'Release' ">true</MvcRazorCompileOnPublish>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3"/>
