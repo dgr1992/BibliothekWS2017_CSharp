@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BibliothekWS2017_CSharp.Media;
+using BibliothekWS2017_CSharp.RemoteClasses;
 using Newtonsoft.Json;
 
 namespace BibliothekWS2017_CSharp
@@ -68,5 +69,35 @@ namespace BibliothekWS2017_CSharp
 
             return dvds;
         }
+
+
+        /// <summary>
+        /// Rent a Medium 
+        /// </summary>
+        /// <param name="rental"></param>
+        public String RentMedium(String customernumber, String copynumber){
+            
+            Rental rental = new Rental();
+            rental.CustomerNumber=customernumber;
+            rental.CopyNumber=copynumber;
+
+            //Perform the put request
+            String jsonObjectArray = _client.Put("rentMedium",rental).Result;
+            
+            //Convert the json string to objects
+            String rentedMessage = JsonConvert.DeserializeObject<String>(jsonObjectArray);
+
+            return rentedMessage;  
+        }
+
+        public Boolean Login(UserAccount user){
+            
+            String jsonObjectArray = _client.Put("authenticateUser",user).Result;
+
+            Boolean loginStatus = JsonConvert.DeserializeObject<Boolean>(jsonObjectArray);
+            
+            return loginStatus;
+        }
+
     }
 }
