@@ -4,7 +4,7 @@ namespace BibliothekWS2017_CSharp.RemoteClasses{
     private string firstName { get; set; } = "";
     private string lastName { get; set; } = "";
     private string customerId { get; set; } = "";
-    private Address address { get; set; } = "";
+    private Address address { get; set; } = null;
     private string dateOfBirth { get; set; } = "";
     private string email { get; set; } = "";
     private string phoneNumber { get; set; } = "";

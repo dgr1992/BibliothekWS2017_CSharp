@@ -72,22 +72,32 @@ namespace BibliothekWS2017_CSharp
 
 
         /// <summary>
-        /// Rent a Medium 
+        /// Rent a medium by customer number and copy number
         /// </summary>
-        /// <param name="rental"></param>
+        /// <param name="customernumber">Customers personal identification number</param>
+        /// <param name="copynumber">Copy number of the medium to rent</param>
+        /// <returns>String with message "Successful rented" or "Rent failed"</returns>
         public String RentMedium(String customernumber, String copynumber){
             
             Rental rental = new Rental();
-            rental.CustomerNumber=customernumber;
-            rental.CopyNumber=copynumber;
+            rental.customerNumber=customernumber;
+            rental.copyNumber=copynumber;
 
             //Perform the put request
             String jsonObjectArray = _client.Put("rentMedium",rental).Result;
-            
-            //Convert the json string to objects
-            String rentedMessage = JsonConvert.DeserializeObject<String>(jsonObjectArray);
 
-            return rentedMessage;  
+            //Convert the json string to objects
+            //String rentedMessage = JsonConvert.DeserializeObject<String>(jsonObjectArray);
+
+            if(jsonObjectArray == null){
+                return "Rent failed";
+            }
+            
+            if(jsonObjectArray.Contains("SUCCESS")){
+                return "Successful rented";
+            } else {
+                return "Rent failed";
+            }
         }
 
         public Boolean Login(UserAccount user){
