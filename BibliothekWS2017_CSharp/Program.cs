@@ -12,7 +12,7 @@ namespace BibliothekWS2017_CSharp
     {
         static void Main(string[] args)
         {
-            RestClientController controller = new RestClientController("http://localhost:8080/BibliothekWS2017Server/", "application/json");
+            RestClientController controller = new RestClientController("http://10.0.51.95:9000/BibliothekWS2017Server/", "application/json");
 
             Console.WriteLine("Get all Books");
             Book[] books = controller.GetAllBooks();

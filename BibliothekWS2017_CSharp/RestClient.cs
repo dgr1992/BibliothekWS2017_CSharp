@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace BibliothekWS2017_CSharp
 {
@@ -37,8 +38,11 @@ namespace BibliothekWS2017_CSharp
         public async Task<String> Put(String path, Object data)
         {
             String result = null;
+
+            String jsonObject = JsonConvert.SerializeObject(data);
+
             //Perform the request
-            HttpResponseMessage response = await _client.PostAsJsonAsync(path, data);
+            HttpResponseMessage response = await _client.PostAsync(_url + path, new StringContent(jsonObject));
             //Check if request was successful and process the answer
             if (response.IsSuccessStatusCode)
             {
