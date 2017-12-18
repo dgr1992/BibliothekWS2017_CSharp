@@ -30,7 +30,6 @@ namespace BibliothekWS2017_CSharp.Media
         public override string ToString()
         {
             return "---------------------\n" +
-                   "id : " + id + "\n" +
                    "titel : " + title + "\n" +
                    "isbn : " + isbn + "\n" +
                    "releaseDate : " + getDateFormated() + "\n" +

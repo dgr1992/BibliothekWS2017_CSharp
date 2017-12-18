@@ -12,27 +12,86 @@ namespace BibliothekWS2017_CSharp
     {
         static void Main(string[] args)
         {
-            RestClientController controller = new RestClientController("http://10.0.51.95:9000/BibliothekWS2017Server/", "application/json");
+            string url="";
 
-            Console.WriteLine("Get all Books");
-            Book[] books = controller.GetAllBooks();
-            foreach (Book book in books)
+            if (args.Length < 2)
             {
-                Console.WriteLine(book);
+                System.Console.WriteLine("Please add url with -url \"url\"");
+                return;
+            } else {
+                if(args[0].Contains("-url")){
+                    url = args[1];   
+                }
             }
 
+            try
+            {
+                RestClientController controller = new RestClientController(url, "application/json");
+            } catch (Exception ex)
+            {
+                Console.WriteLine("Connect to server faild.");
+                return;
+            }
+
+            PrintWelcome();
+
+
+        }
+
+        private static void PrintWelcome(){
+            Console.WriteLine("#####################################");
+            Console.WriteLine("#                                   #");
+            Console.WriteLine("#              Welcome              #");
+            Console.WriteLine("#                                   #");
+            Console.WriteLine("#####################################");
+        }
+
+        private static void Menu()
+        {           
+            bool inputValid = false;
+            bool exitApplication = false;
+            string input = "";
+        
+            while(!inputValid && exitApplication)
+            {
+                Console.WriteLine("Possible actions: ");
+                Console.WriteLine("           - Enter \"b\" to search for books");
+                Console.WriteLine("           - Enter \"d\" to search for dvds");
+                Console.WriteLine("           - Enter \"l\" to login");
+                Console.WriteLine("           - Enter \"e\" to exit");
+                input = Console.ReadLine();
+                if(input.Contains("b") || input.Contains("d") || input.Contains("l")){
+                    switch(input){
+                        case "b":
+                            SearchForBook();
+                        break;
+                        case "d":
+                            SearchForDvd();
+                        break;
+                        case "l":
+                        break;
+                        default:
+                        break;
+                    }
+                } else if(input.Contains("e"))
+                {
+
+                }
+            }
+        }
+
+        private static void SearchForBook()
+        {
             
-            Console.WriteLine("================");
-            Console.WriteLine("Search for the book \"Der kleine Hobbit\" with the string \"d\"");
-            Book bookToSearch = new Book();
-            bookToSearch.title = "d";
-            books = controller.SearchForBook(bookToSearch);
-            foreach (Book book in books)
-            {
-                Console.WriteLine(book);
-            }
+        }
+        private static void SearchForDvd()
+        {
 
-            Console.Read();
+        }
+
+        private static void Login()
+        {
+
         }
     }
 }
