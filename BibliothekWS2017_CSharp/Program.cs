@@ -209,6 +209,43 @@ namespace BibliothekWS2017_CSharp
 
         private static void Login()
         {
+            Console.WriteLine("#####################################");
+            Console.WriteLine("#                Menu               #");
+            Console.WriteLine("#####################################");
+
+            Console.Write("User: ");
+            string user = Console.ReadLine();
+
+            Console.Write("Password: ");
+            //Do not show entered characters of password
+            StringBuilder password = new StringBuilder( );
+            while ( true )
+            {
+                ConsoleKeyInfo cki = Console.ReadKey( true );
+                if ( cki.Key == ConsoleKey.Enter )
+                {   
+                    //Fill with blank
+                    Console.WriteLine( );
+                    break;
+                }
+
+                if ( cki.Key == ConsoleKey.Backspace )
+                {
+                    if ( password.Length > 0 )
+                    {
+                        Console.Write( "\b\0\b" );
+                        password.Length--;
+                    }
+
+                    continue;
+                }
+
+                Console.Write( '*' );
+                password.Append( cki.KeyChar );
+            }
+
+            bool success = _controller.Login(user,password.ToString());
+
             _userLoggedIn = true;
             MenuLoggedIn();
         }

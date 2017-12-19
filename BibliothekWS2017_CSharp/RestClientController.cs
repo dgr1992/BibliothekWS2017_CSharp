@@ -114,7 +114,7 @@ namespace BibliothekWS2017_CSharp
             string hashed = BitConverter.ToString(hmac.ComputeHash(buffer));
 
             _client.SetAuthorizationHeader(hashed);
-            string jsonObjectArray = _client.Get("authenticateUser").Result;
+            string jsonObjectArray = _client.Put("authenticateUser", null).Result;
             bool loginStatus = JsonConvert.DeserializeObject<Boolean>(jsonObjectArray);
             
             return loginStatus;
