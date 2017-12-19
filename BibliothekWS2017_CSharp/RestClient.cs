@@ -73,5 +73,12 @@ namespace BibliothekWS2017_CSharp
             return result;
         }
 
+        public void SetAuthorizationHeader(String data){
+            _client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", data);
+        }
+
+        public void ClearAuthorizationHeader(){
+            _client.DefaultRequestHeaders.Authorization = null;
+        }
     }
 }

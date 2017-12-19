@@ -6,8 +6,6 @@
     <WarningsAsErrors>true</WarningsAsErrors>
     <AssemblyName>BibliothekWS2017_Client</AssemblyName>
     <OutputType>Exe</OutputType>
-    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
-    <MvcRazorCompileOnPublish Condition=" '$(Configuration)' == 'Release' ">true</MvcRazorCompileOnPublish>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3"/>

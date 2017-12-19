@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using BibliothekWS2017_CSharp.Media;
 using BibliothekWS2017_CSharp.RemoteClasses;
@@ -80,8 +81,8 @@ namespace BibliothekWS2017_CSharp
         public String RentMedium(String customernumber, String copynumber){
             
             Rental rental = new Rental();
-            rental.customerNumber=customernumber;
-            rental.copyNumber=copynumber;
+            rental.customerNumber = customernumber;
+            rental.copyNumber = copynumber;
 
             //Perform the put request
             String jsonObjectArray = _client.Put("rentMedium",rental).Result;
@@ -100,11 +101,21 @@ namespace BibliothekWS2017_CSharp
             }
         }
 
-        public Boolean Login(UserAccount user){
-            
-            String jsonObjectArray = _client.Put("authenticateUser",user).Result;
+        public bool Login(string user, string password){
 
-            Boolean loginStatus = JsonConvert.DeserializeObject<Boolean>(jsonObjectArray);
+            string secretKey = "testKey";
+            var enc = Encoding.ASCII;
+            HMACSHA1 hmac = new HMACSHA1(enc.GetBytes(secretKey));
+            hmac.Initialize();
+
+            byte[] buffer = enc.GetBytes(user +":"+password);
+            //return BitConverter.ToString(hmac.ComputeHash(buffer)).Replace("-", "").ToLower();            
+
+            string hashed = BitConverter.ToString(hmac.ComputeHash(buffer));
+
+            _client.SetAuthorizationHeader(hashed);
+            string jsonObjectArray = _client.Get("authenticateUser").Result;
+            bool loginStatus = JsonConvert.DeserializeObject<Boolean>(jsonObjectArray);
             
             return loginStatus;
         }
